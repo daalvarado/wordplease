@@ -1,0 +1,62 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Julius+Sans+One|Nunito+Sans|Oxygen|Pontano+Sans">
+    <title>Wordplease</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="container-top">
+            <header class="header">
+                <div class="logo">
+
+                    <img src="{% static 'images/Logo.jpg' %}" alt="Word App">
+
+                </div>
+            </header>
+
+            <nav class="navbar">
+                <button aria-expanded="false" aria-controls="nav-list">
+                    <span class="open">☰</span>
+                    <span class="close">×</span>
+                </button>
+                <ul id="nav-list">
+                    <li>
+                        <a class="navbar-item" href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a class="navbar-item" href="index.html">Blogs</a>
+                    </li>
+                    <li>
+                        <a class="navbar-item" href="index.html">Add Blog</a>
+                    </li>
+                    <li>
+                        <a class="navbar-item" href="index.html">Edit Blog</a>
+                    </li>
+                    <li>
+                        <a class="navbar-item" href="index.html">API</a>
+                    </li>
+                    <li>
+                        <a class="navbar-item loginButton" href="index.html">Login</a>
+                    </li>
+                    <li>
+                        <a class="navbar-item registerButton" href="index.html">Register</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="searchzone">
+                <input class="searchbar" type="search" placeholder="Search" aria-label="Search">
+                <button class="searchButton" type="submit">Search</button>
+            </div>
+        </div>

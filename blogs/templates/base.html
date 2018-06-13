@@ -1,0 +1,22 @@
+
+
+{% include "includes/header.html" %}
+
+
+<div>
+    {% include "includes/messages.html" %}
+    <h1 class="pageTitle"> {% block title %} {% endblock %}</h1>
+    {% block body %}
+    <p> Content </p>
+    {% endblock %}
+
+
+
+
+</div>
+
+
+{% include "includes/footer.html" %}
+
+
+

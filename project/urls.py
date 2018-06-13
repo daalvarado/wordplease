@@ -12,10 +12,14 @@ Class-based views
 Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+    path('blogs/', include('blogs.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from accounts import views as accounts_views
 
 urlpatterns = [
+    path('blogs/', include('blogs.urls')),
     path('admin/', admin.site.urls),
+    path('signup/', accounts_views.signup, name='signup'),
 ]
