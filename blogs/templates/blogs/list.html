@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+
+
+{% block body %}
+
+    {% for BlogPost in object_list %}
+
+        <div class="PostSummary">
+
+            <p class="SumTitle">
+                <strong>{{ BlogPost.title }} </strong> </p>
+            <p class="SumSummary"> {{ BlogPost.summary}} </p>
+            <p class="OtherInfo PostDate"><strong>POST DATE:</strong> {{BlogPost.date_posted}}</p>
+            <p class="OtherInfo Blog"><strong>IN BLOG:</strong> {{BlogPost.blog}}</p>
+            <p class="OtherInfo Author"><strong>AUTHOR:</strong> {{BlogPost.blog.author}}</p>
+        </div>
+
+    {% endfor %}
+{% endblock %}

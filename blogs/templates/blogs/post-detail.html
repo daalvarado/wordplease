@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+
+
+{% block body %}
+
+
+        <div class="PostSummary">
+
+            <p class="SumTitle"><strong>{{ object.title }} </strong> </p>
+            <p class="SumSummary"> {{ object.summary}} </p>
+            <P> {{ object.image_video_url}} </P>
+            <p>    {{ object.contents}}          </p>
+            <p> Categories: {{ object.categories.all | unordered_list }} </p>
+            <p> {{ object.date_posted}} </p>
+        </div>
+
+
+{% endblock %}

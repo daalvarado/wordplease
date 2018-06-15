@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load tz % }
+
+
+{% block body %}
+    {% for Blog in object_list %}
+
+        <div class="PostSummary">
+
+            <p class="SumTitle">
+                <strong>{{ Blog.blog_name }} </strong> </p>
+            <p class="SumSummary"> {{ Blog.description}}</p>
+            <p class="OtherInfo BlogAuthor"><strong>AUTHOR:</strong> {{ Blog.author}}</p>
+            <p class="OtherInfo NumPosts"><strong>NUMBER OF POSTS:</strong> {{ Blog.blogposts.count }}</p>
+        </div>
+
+    {% endfor %}
+{% endblock %}

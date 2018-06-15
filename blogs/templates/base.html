@@ -5,10 +5,13 @@
 
 <div>
     {% include "includes/messages.html" %}
-    <h1 class="pageTitle"> {% block title %} {% endblock %}</h1>
+    <h1 class="pageTitle"> {% block title %} {{title}} {% endblock %}</h1>
+    <h2 class="pageClaim"> {% block claim %} {{claim}} {% endblock %}</h2>
+    <div class="MiddleContainer">
     {% block body %}
     <p> Content </p>
     {% endblock %}
+        </div>
 
 
 

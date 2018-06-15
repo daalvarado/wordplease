@@ -32,25 +32,33 @@
                 </button>
                 <ul id="nav-list">
                     <li>
-                        <a class="navbar-item" href="index.html">Home</a>
+                        <a class="navbar-item" href="/">Home</a>
                     </li>
                     <li>
-                        <a class="navbar-item" href="index.html">Blogs</a>
+                        <a class="navbar-item" href="/blogs">Blogs</a>
                     </li>
                     <li>
-                        <a class="navbar-item" href="index.html">Add Blog</a>
+                        <a class="navbar-item" href="/new-blog">Add Blog</a>
                     </li>
                     <li>
-                        <a class="navbar-item" href="index.html">Edit Blog</a>
+                        <a class="navbar-item" href="/new-post">Add Post</a>
                     </li>
                     <li>
-                        <a class="navbar-item" href="index.html">API</a>
+                        <a class="navbar-item" href="/my-posts">My Posts</a>
                     </li>
                     <li>
-                        <a class="navbar-item loginButton" href="index.html">Login</a>
+                        {% if user.is_authenticated %}
+                        <a class="navbar-item logoutButton" href="/logout">Logout</a>
+                        {% else %}
+                        <a class="navbar-item loginButton" href="/login">Login</a>
+                        {% endif %}
                     </li>
                     <li>
-                        <a class="navbar-item registerButton" href="index.html">Register</a>
+                        {% if user.is_authenticated %}
+                        <a class="navbar-item registerButton">{{user}}</a>
+                        {% else %}
+                        <a class="navbar-item registerButton" href="/signup">Register</a>
+                        {% endif %}
                     </li>
                 </ul>
             </nav>

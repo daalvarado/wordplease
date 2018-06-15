@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %} Register New User {% endblock %}
+
 
 {% block body %}
 
- <form method="post">
+ <form method="post" class="SignupForm" novalidate>
     {% csrf_token %}
     {% for field in form %}
       <p>

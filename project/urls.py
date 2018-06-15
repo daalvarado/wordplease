@@ -15,11 +15,23 @@ Including another URLconf
     path('blogs/', include('blogs.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
+
+from blogs.views import HomeView, BlogsList, UserBlogs, PostDetail, NewPost, MyPosts, error_404
 from accounts import views as accounts_views
+from django.conf.urls import handler404
 
 urlpatterns = [
-    path('blogs/', include('blogs.urls')),
+    path('', HomeView.as_view(), name='home'),
+    path('blogs/<str:account>/<int:pk>', PostDetail.as_view(), name='post-detail'),
+    path('my-posts', MyPosts.as_view(), name='my-posts'),
+    path('blogs/<str:account>', UserBlogs.as_view(), name='user-blogs'),
+    path('blogs', BlogsList.as_view(), name='blogs'),
+    path('new-post', NewPost.as_view(),name='new-post'),
     path('admin/', admin.site.urls),
-    path('signup/', accounts_views.signup, name='signup'),
+    path('signup/', accounts_views.signup, name='acc-signup'),
+    path('login', accounts_views.LoginView.as_view(), name='acc-login'),
+    path('logout', accounts_views.LogoutView.as_view(), name='acc-logout'),
 ]
+
+handler404 = error_404
