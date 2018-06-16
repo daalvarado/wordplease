@@ -105,6 +105,11 @@ button:hover {
   border: 5px solid white;
 }
 
+.ToBePublished {
+  color: #296EB4;
+  background: #ffc40e;
+}
+
 .PostCategories {
   text-align: left;
   font-weight: bold;

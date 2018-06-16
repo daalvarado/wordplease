@@ -4,7 +4,7 @@
 
 {% block body %}
     {% for Blog in object_list %}
-
+        <a class="PostSummaryLink" href="{% url 'blog-contents' Blog.author Blog.blog_name %}">
         <div class="PostSummary">
 
             <p class="SumTitle">

@@ -36,7 +36,7 @@ class BlogsList(ListView):
 
     def get_queryset(self):
         result = super().get_queryset()
-        return result.exclude(blogposts__date_posted__gt=timezone.now()).order_by('blog_name')
+        return result.order_by('blog_name')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -44,6 +44,19 @@ class BlogsList(ListView):
         context['claim'] = 'Check out our collection of blogs'
         return context
 
+class BlogContents(ListView):
+    model = BlogPost
+    template_name = 'blogs/list.html'
+
+    def get_queryset(self, **kwargs):
+        qs = super().get_queryset()
+        return qs.filter(date_posted__lt=timezone.now()).filter(blog__blog_name=self.kwargs['blogname']).order_by('title')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = self.kwargs['blogname']
+        context['claim'] = 'Check out the contents of this blog'
+        return context
 
 class UserBlogs(ListView):
 
@@ -73,7 +86,7 @@ class PostDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = self.kwargs['account'] + "'s Blog Post - ID= "+str(self.kwargs['pk'])
+        context['title'] = self.kwargs['account'] + "'s Blog Post -> ID= "+str(self.kwargs['pk'])
         context['claim'] = 'Check out this incredible post'
         return context
 
@@ -97,6 +110,26 @@ class MyPosts(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = "My Posts"
         context['claim'] = 'The best blog posts in the world'
+        return context
+
+class MyBlogs(LoginRequiredMixin, ListView):
+
+    model = Blog
+    template_name = 'blogs/blogs.html'
+    login_url='/login'
+    permission_denied_message = 'You must be logged in to do this!'
+
+
+
+    def get_queryset(self, **kwargs):
+        qs = super().get_queryset()
+        return qs.filter(author__username__iexact=self.request.user).order_by('blog_name')
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = "My Blogs"
+        context['claim'] = 'The best blogs in the world'
         return context
 
 

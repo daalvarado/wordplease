@@ -18,16 +18,18 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls.static import static
-from blogs.views import HomeView, BlogsList, UserBlogs, PostDetail, NewPost, MyPosts, NewBlog
+from blogs.views import HomeView, BlogsList, UserBlogs, PostDetail, NewPost, MyPosts, NewBlog, BlogContents, MyBlogs
 from accounts import views as accounts_views
 
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     path('blogs/<str:account>/<int:pk>', PostDetail.as_view(), name='post-detail'),
-    path('my-posts', MyPosts.as_view(), name='my-posts'),
+    path('blogs/<str:account>/<str:blogname>', BlogContents.as_view(), name='blog-contents'),
     path('blogs/<str:account>', UserBlogs.as_view(), name='user-blogs'),
     path('blogs', BlogsList.as_view(), name='blogs'),
+    path('my-posts', MyPosts.as_view(), name='my-posts'),
+    path('my-blogs', MyBlogs.as_view(), name='my-blogs'),
     path('new-post', NewPost.as_view(),name='new-post'),
 path('new-blog', NewBlog.as_view(),name='new-blog'),
     path('admin/', admin.site.urls),

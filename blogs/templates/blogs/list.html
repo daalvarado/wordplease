@@ -19,6 +19,9 @@
             <p class="OtherInfo PostDate"><strong>POST DATE:</strong> {{BlogPost.date_posted}}</p>
             <p class="OtherInfo Blog"><strong>IN BLOG:</strong> {{BlogPost.blog}}</p>
             <p class="OtherInfo Author"><strong>AUTHOR:</strong> {{BlogPost.blog.author}}</p>
+            {% if BlogPost.publish == "False" %}
+            <p class="ToBePublished">NOT PUBLISHED YET</p>
+            {% endif %}
         </div>
         </a>
     {% endfor %}
