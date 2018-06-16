@@ -22,6 +22,7 @@ class BlogPostForm(ModelForm):
     class Meta:
         model = BlogPost
         fields = '__all__'
+        exclude = ['owner']
 
 
 

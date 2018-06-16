@@ -33,6 +33,7 @@ class Blog(models.Model):
 
 class BlogPost(models.Model):
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE, default="", related_name="blogposts")
+    owner = models.ForeignKey('auth.User', related_name='newpost', on_delete=models.CASCADE)
     title = models.CharField(max_length=60)
     summary = models.CharField(max_length=140)
     contents = models.TextField()
@@ -41,6 +42,7 @@ class BlogPost(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
     date_posted = models.DateTimeField(default=timezone.now)
+
 
     objects = EntryQuerySet.as_manager()
 

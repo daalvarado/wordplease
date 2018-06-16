@@ -16,10 +16,18 @@ Including another URLconf
 """
 from django.conf import settings
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.conf.urls.static import static
+from rest_framework.routers import DefaultRouter
+
+from blogs.api import BlogsViewSet, BlogPostViewSet, MyPostsAPI
 from blogs.views import HomeView, BlogsList, UserBlogs, PostDetail, NewPost, MyPosts, NewBlog, BlogContents, MyBlogs
 from accounts import views as accounts_views
+
+
+router = DefaultRouter()
+router.register('/blogs', BlogsViewSet)
+router.register('/blogposts', BlogPostViewSet)
 
 
 urlpatterns = [
@@ -31,10 +39,14 @@ urlpatterns = [
     path('my-posts', MyPosts.as_view(), name='my-posts'),
     path('my-blogs', MyBlogs.as_view(), name='my-blogs'),
     path('new-post', NewPost.as_view(),name='new-post'),
-path('new-blog', NewBlog.as_view(),name='new-blog'),
+    path('new-blog', NewBlog.as_view(),name='new-blog'),
     path('admin/', admin.site.urls),
     path('signup/', accounts_views.signup, name='acc-signup'),
     path('login', accounts_views.LoginView.as_view(), name='acc-login'),
     path('logout', accounts_views.LogoutView.as_view(), name='acc-logout'),
+
+    #API Urls
+    path('api/my-posts', MyPostsAPI.as_view(), name="api-posts-mine"),
+    path('api', include(router.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

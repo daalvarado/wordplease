@@ -44,8 +44,26 @@ button:hover {
   grid-template-areas:
     "top"
     "middle"
+    "pagination"
     "footer";
 }
+
+.pagination {
+  display: grid;
+  align-items: center;
+  width: 100%;
+  background: #ffc600;
+  grid-area: pagination;
+  grid-template-rows: 40px;
+  grid-template-columns: repeat(10, 100px);
+  list-style-type: none;
+  font-size: larger;
+  color: white;
+  text-align: center;
+  justify-content: center;
+}
+
+
 
 .container-top {
   grid-area: top;
@@ -387,6 +405,8 @@ a.registerButton {
   font-size: 15px;
   font-weight: 200;
 }
+
+
 
 .pages {
   display: grid;

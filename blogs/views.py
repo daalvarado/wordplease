@@ -1,8 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
+from django.shortcuts import render,  redirect
 from django.views.generic import ListView, DetailView
 from django.views import View
 from django.contrib import messages
@@ -16,6 +13,7 @@ class HomeView(ListView):
 
     model = BlogPost
     template_name = 'blogs/list.html'
+    paginate_by = 3
 
     def get_queryset(self):
         result = super().get_queryset()
@@ -157,7 +155,7 @@ class NewPost(LoginRequiredMixin, View):
         :return: HttpResponse con la respuesta
         """
         blogpost = BlogPost()
-
+        blogpost.owner = request.user
         form = BlogPostForm(request, request.POST, request.FILES, instance=blogpost)
         if form.is_valid():
             # creamos el blog
