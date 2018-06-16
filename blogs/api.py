@@ -1,15 +1,17 @@
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.generics import ListAPIView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.viewsets import ModelViewSet
-
+from django.utils import timezone
 from blogs.models import Blog, BlogPost
 from blogs.permissions import BlogPostPermissions
 from blogs.serializers import BlogListSerializer, BlogPostListSerializer, BlogPostDetailSerializer, \
     NewBlogPostSerializer
+from django.db.models import Q
 
 
-class BlogsViewSet (ModelViewSet):
+
+class BlogsViewSet(ModelViewSet):
 
     queryset= Blog.objects.all()
     allowed_methods = (['GET'])
@@ -22,9 +24,17 @@ class BlogsViewSet (ModelViewSet):
         return BlogListSerializer
 
 
-class BlogPostViewSet (ModelViewSet):
+class BlogPostViewSet(ModelViewSet):
 
-    queryset = BlogPost.objects.all()
+    def get_queryset(self):
+        if self.request.user.is_authenticated:
+            if self.request.user.is_superuser:
+                return BlogPost.objects.all()
+            else:
+                return BlogPost.objects.filter(Q(owner=self.request.user) | Q(date_posted__lt=timezone.now()))
+        else:
+            return BlogPost.objects.filter(date_posted__lt=timezone.now())
+
     permission_classes = [BlogPostPermissions]
     filter_backends = [SearchFilter, OrderingFilter]
     search_fields = ['title', 'contents', 'summary']

@@ -20,15 +20,16 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
 
+from accounts.api import UserViewSet
 from blogs.api import BlogsViewSet, BlogPostViewSet, MyPostsAPI
 from blogs.views import HomeView, BlogsList, UserBlogs, PostDetail, NewPost, MyPosts, NewBlog, BlogContents, MyBlogs
 from accounts import views as accounts_views
 
 
 router = DefaultRouter()
-router.register('/blogs', BlogsViewSet)
-router.register('/blogposts', BlogPostViewSet)
-
+router.register('blogs', BlogsViewSet, base_name="Blog")
+router.register('blogposts', BlogPostViewSet, base_name="BlogPost")
+router.register('users', UserViewSet, base_name='users')
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
@@ -47,6 +48,6 @@ urlpatterns = [
 
     #API Urls
     path('api/my-posts', MyPostsAPI.as_view(), name="api-posts-mine"),
-    path('api', include(router.urls)),
+    path('api/', include(router.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
