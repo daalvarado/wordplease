@@ -16,6 +16,7 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             django_login(request, user)
+            form = SignUpForm()
             messages.success(request, 'Thank you for joining!!')
             return redirect('home')
     else:

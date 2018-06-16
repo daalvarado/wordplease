@@ -1,15 +1,12 @@
+{% load static %}
+
 {% if messages %}
-    {% for message in messages %}
-        {% if 'error' in message.tags %}
-            <div style="color:red">{{ message }}</div>
-        {% elif 'success' in message.tags %}
-            <div style="color:green">{{ message }}</div>
-        {% elif 'warning' in message.tags %}
-            <div style="color:orange">{{ message }}</div>
-        {% elif 'info' in message.tags %}
-            <div style="color:dodgerblue">{{ message }}</div>
-        {% else %}
-            <div>{{ message }}</div>
-        {% endif %}
+<ul >
+    {% for msg in messages %}
+    <li class="flash flash--{{msg.level_tag}}">
+        <div class="flash__text"> {{msg.message}} {{msg.level_tag}}</div>
+    </li>
+
     {% endfor %}
+</ul>
 {% endif %}

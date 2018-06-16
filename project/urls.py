@@ -14,12 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
     path('blogs/', include('blogs.urls'))
 """
+from django.conf import settings
 from django.contrib import admin
 from django.urls import path
-
-from blogs.views import HomeView, BlogsList, UserBlogs, PostDetail, NewPost, MyPosts, error_404
+from django.conf.urls.static import static
+from blogs.views import HomeView, BlogsList, UserBlogs, PostDetail, NewPost, MyPosts, NewBlog
 from accounts import views as accounts_views
-from django.conf.urls import handler404
+
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
@@ -28,10 +29,10 @@ urlpatterns = [
     path('blogs/<str:account>', UserBlogs.as_view(), name='user-blogs'),
     path('blogs', BlogsList.as_view(), name='blogs'),
     path('new-post', NewPost.as_view(),name='new-post'),
+path('new-blog', NewBlog.as_view(),name='new-blog'),
     path('admin/', admin.site.urls),
     path('signup/', accounts_views.signup, name='acc-signup'),
     path('login', accounts_views.LoginView.as_view(), name='acc-login'),
     path('logout', accounts_views.LogoutView.as_view(), name='acc-logout'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-handler404 = error_404

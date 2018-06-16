@@ -5,16 +5,21 @@
 {% block body %}
 
     {% for BlogPost in object_list %}
-
+        <a class="PostSummaryLink" href="{% url 'post-detail' BlogPost.blog.author BlogPost.pk %}">
         <div class="PostSummary">
 
             <p class="SumTitle">
                 <strong>{{ BlogPost.title }} </strong> </p>
+            {% if BlogPost.image_video_url %}
+            <p class ="PostImageBox">
+                <img class="PostImage" src="{{ BlogPost.image_video_url.url }}" alt="{{ BlogPost.title }}" title="{{ BlogPost.title }}">
+            </p>
+            {% endif %}
             <p class="SumSummary"> {{ BlogPost.summary}} </p>
             <p class="OtherInfo PostDate"><strong>POST DATE:</strong> {{BlogPost.date_posted}}</p>
             <p class="OtherInfo Blog"><strong>IN BLOG:</strong> {{BlogPost.blog}}</p>
             <p class="OtherInfo Author"><strong>AUTHOR:</strong> {{BlogPost.blog.author}}</p>
         </div>
-
+        </a>
     {% endfor %}
 {% endblock %}

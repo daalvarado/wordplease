@@ -5,13 +5,17 @@
 {% block body %}
 
 
-        <div class="PostSummary">
+        <div class="PostDetail">
 
             <p class="SumTitle"><strong>{{ object.title }} </strong> </p>
             <p class="SumSummary"> {{ object.summary}} </p>
-            <P> {{ object.image_video_url}} </P>
-            <p>    {{ object.contents}}          </p>
-            <p> Categories: {{ object.categories.all | unordered_list }} </p>
+            {% if object.image_video_url %}
+            <p class ="PostImageBox">
+                <img class="PostImage" src="{{ object.image_video_url.url }}" alt="{{ object.title }}" title="{{ object.title }}">
+            </p>
+            {% endif %}
+            <p class="PostMainContent">   {% autoescape off %} {{ object.contents}}   {% endautoescape %}       </p>
+            <p class="PostCategories"> Categories: {{ object.categories.all | unordered_list }} </p>
             <p> {{ object.date_posted}} </p>
         </div>
 

@@ -3,8 +3,10 @@
 {% include "includes/header.html" %}
 
 
-<div>
+<div class="container-mid">
+    <div class = "messages">
     {% include "includes/messages.html" %}
+        </div>
     <h1 class="pageTitle"> {% block title %} {{title}} {% endblock %}</h1>
     <h2 class="pageClaim"> {% block claim %} {{claim}} {% endblock %}</h2>
     <div class="MiddleContainer">

@@ -33,10 +33,10 @@ class Blog(models.Model):
 
 class BlogPost(models.Model):
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE, default="", related_name="blogposts")
-    title = models.CharField(max_length=20)
+    title = models.CharField(max_length=60)
     summary = models.CharField(max_length=140)
     contents = models.TextField()
-    image_video_url = models.FileField(blank=True)
+    image_video_url = models.FileField(upload_to='uploads', blank=True)
     categories = models.ManyToManyField(Category)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)

@@ -1,10 +1,8 @@
 {% extends "base.html" %}
 
-
-
 {% block body %}
 
- <form method="post" class="SignupForm" novalidate>
+ <form method="post" class="SignupForm" enctype="multipart/form-data" novalidate>
     {% csrf_token %}
     {% for field in form %}
       <p>
@@ -18,7 +16,7 @@
         {% endfor %}
       </p>
     {% endfor %}
-    <button type="submit">Sign up</button>
+    <button type="submit">Create Post</button>
   </form>
 
 
